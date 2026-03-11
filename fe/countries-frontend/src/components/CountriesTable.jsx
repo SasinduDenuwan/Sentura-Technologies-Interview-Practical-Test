@@ -66,11 +66,16 @@ function CountriesTable() {
             {error && <div className="error-banner">{error}</div>}
 
             {loading ? (
-                <div className="loading">Loading...</div>
+                <div className="loading">
+                    <div className="spinner"></div>
+                    <span>Loading countries…</span>
+                </div>
             ) : (
                 <>
                     <p className="results-count">{countries.length} countries found</p>
-                    <div className="table-wrapper">
+
+                    {/* ── Desktop Table ── */}
+                    <div className="table-wrapper desktop-only">
                         <table>
                             <thead>
                                 <tr>
@@ -88,7 +93,11 @@ function CountriesTable() {
                                         onClick={() => setSelectedCountry(country)}
                                     >
                                         <td>
-                                            <img src={country.flag} alt={`${country.name} flag`} width="48" className="flag-img" />
+                                            <img
+                                                src={country.flag}
+                                                alt={`${country.name} flag`}
+                                                className="flag-img"
+                                            />
                                         </td>
                                         <td className="country-name">{country.name}</td>
                                         <td>{country.capital}</td>
@@ -98,6 +107,26 @@ function CountriesTable() {
                                 ))}
                             </tbody>
                         </table>
+                    </div>
+
+                    {/* ── Mobile Card Grid ── */}
+                    <div className="cards-grid mobile-only">
+                        {countries.map((country) => (
+                            <div
+                                key={country.name}
+                                className="country-card"
+                                onClick={() => setSelectedCountry(country)}
+                            >
+                                <img
+                                    src={country.flag}
+                                    alt={`${country.name} flag`}
+                                    className="card-flag"
+                                />
+                                <span className="card-name">{country.name}</span>
+                                <span className="card-capital">{country.capital || "—"}</span>
+                                <span className="region-badge card-region">{country.region}</span>
+                            </div>
+                        ))}
                     </div>
                 </>
             )}
