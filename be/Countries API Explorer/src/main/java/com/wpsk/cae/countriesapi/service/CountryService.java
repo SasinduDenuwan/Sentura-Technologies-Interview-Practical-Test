@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class CountryService {
 
-    private static final String API_URL = "https://restcountries.com/v3.1/all";
+    private static final String API_URL = "https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags";
 
     private List<Country> cache = new ArrayList<>();
     private long lastFetchTime = 0;
@@ -56,8 +56,9 @@ public class CountryService {
         String name = ((Map<String, Object>) data.get("name")).get("common").toString();
 
         String capital = "";
-        if (data.get("capital") != null) {
-            capital = ((List<String>) data.get("capital")).get(0);
+        List<String> capitalList = (List<String>) data.get("capital");
+        if (capitalList != null && !capitalList.isEmpty()) {
+            capital = capitalList.get(0);
         }
 
         String region = data.get("region").toString();
