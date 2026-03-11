@@ -1,5 +1,5 @@
 import React from "react";
-import CountriesTable from "./components/CountriesTable";
+import CountriesTable from "./components/CountriesTable.jsx";
 import "./App.css";
 
 function App() {
