@@ -1,27 +1,28 @@
 import React from "react";
 
 function CountryModal({ country, onClose }) {
-
   return (
-
-    <div className="modal-overlay">
-
-      <div className="modal">
-
-        <h2>{country.name}</h2>
-
-        <img src={country.flag} alt="flag" width="120"/>
-
-        <p><strong>Capital:</strong> {country.capital}</p>
-        <p><strong>Region:</strong> {country.region}</p>
-        <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
-
-        <button onClick={onClose}>Close</button>
-
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close-btn" onClick={onClose}>✕</button>
+        <img src={country.flag} alt={`${country.name} flag`} className="modal-flag" />
+        <h2 className="modal-title">{country.name}</h2>
+        <div className="modal-details">
+          <div className="modal-detail-item">
+            <span className="detail-label">🏛️ Capital</span>
+            <span className="detail-value">{country.capital}</span>
+          </div>
+          <div className="modal-detail-item">
+            <span className="detail-label">🌐 Region</span>
+            <span className="detail-value">{country.region}</span>
+          </div>
+          <div className="modal-detail-item">
+            <span className="detail-label">👥 Population</span>
+            <span className="detail-value">{country.population?.toLocaleString()}</span>
+          </div>
+        </div>
       </div>
-
     </div>
-
   );
 }
 
