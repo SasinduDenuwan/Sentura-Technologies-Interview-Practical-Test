@@ -26,8 +26,8 @@ body {
 
 /* ── Container ── */
 .container {
-  width: 92%;
-  max-width: 1200px;
+  width: 96%;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 40px 0 60px;
   align-self: center;
@@ -56,6 +56,19 @@ body {
   font-weight: 400;
 }
 
+/* ── Sticky search strip ── */
+.search-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 14px 0 10px;
+  margin-bottom: 4px;
+  background: rgba(15, 12, 41, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
 /* ── Search ── */
 .search-wrapper {
   display: flex;
@@ -64,9 +77,9 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 4px 16px;
-  max-width: 480px;
+  max-width: 560px;
   width: 100%;
-  margin: 0 auto 24px;
+  margin: 0 auto;
   backdrop-filter: blur(10px);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -98,6 +111,18 @@ body {
   color: #64748b;
 }
 
+/* ── Inline search spinner ── */
+.search-spinner {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(167, 139, 250, 0.25);
+  border-top-color: #a78bfa;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-left: 10px;
+}
+
 /* ── Results count ── */
 .results-count {
   text-align: right;
@@ -118,32 +143,64 @@ body {
   font-size: 0.9rem;
 }
 
-/* ── Loading Spinner ── */
-.loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 20px;
-  gap: 18px;
-  color: #a78bfa;
-  font-size: 1rem;
-  letter-spacing: 0.05em;
-}
-
-.spinner {
-  width: 44px;
-  height: 44px;
-  border: 3px solid rgba(167, 139, 250, 0.2);
-  border-top-color: #a78bfa;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ── Table loading state ── */
+.table-loading {
+  opacity: 0.55;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* ── Table fading (crossfade on search) ── */
+.table-fading {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.table-wrapper {
+  transition: opacity 0.18s ease;
+}
+
+.cards-grid {
+  transition: opacity 0.18s ease;
+}
+
+/* ── Row fade-in animation ── */
+@keyframes rowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+tbody tr {
+  animation: rowFadeIn 0.3s ease both;
+}
+
+/* ── Card fade-in animation ── */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.country-card {
+  animation: cardFadeIn 0.35s ease both;
 }
 
 /* ── Table wrapper (desktop) ── */
@@ -160,7 +217,7 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 520px;
+  min-width: 700px;
 }
 
 thead {
